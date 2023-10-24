@@ -17,6 +17,7 @@ import AccessesEdge from "./EdgeComponent/AccessesEdge";
 import AccessedByEdge from "./EdgeComponent/AccessedByEdge";
 import DataSubjectNode from "./NodeComponent/DataSubjectNode";
 import NonDataSubjectNode from "./NodeComponent/NonDataSubjectNode";
+import parse from "../../../parser/parse";
 
 const edgeTypes = {
   ownsedge: OwnsEdge,
@@ -30,9 +31,47 @@ const nodeTypes = {
   nondatasubjectnode: NonDataSubjectNode,
 };
 
-const Flow = () => {
+
+
+const createStatements = [
+  `CREATE DATA_SUBJECT TABLE users (
+      id INT PRIMARY KEY
+  );`,
+  `CREATE TABLE stories (
+      id INT PRIMARY KEY,
+      title TEXT,
+      author INT NOT NULL OWNED_BY user(id) 
+  );`,
+  `CREATE TABLE tags (
+      id INT PRIMARY KEY,
+      tag TEXT
+  );`,
+  `CREATE TABLE taggings (
+      id INT PRIMARY KEY,
+      story_id INT NOT NULL OWNED_BY stories(id), 
+      tag_id INT NOT NULL ACCESSES tag(id)
+  );`,
+  `CREATE TABLE messages (
+      id INT PRIMARY KEY, 
+      body text, 
+      sender INT NOT NULL OWNED_BY user(id), 
+      receiver INT NOT NULL OWNED_BY user(id), 
+      ON DEL sender ANON (sender),
+      ON DEL receiver ANON (receiver)
+  );`
+]
+
+const Flow = (props) => {
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const parseRes = []
+  
+  for (const statement of createStatements) {
+    let res = parse(statement);
+    parseRes.push(res)
+  }
+  props.setFinished(true)
+  console.log(parseRes)
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),

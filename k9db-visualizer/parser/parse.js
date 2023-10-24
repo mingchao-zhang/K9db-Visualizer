@@ -101,11 +101,13 @@ function parseCreateStatement(inputString) {
     return res
   }
   
-function parse(statement) {
+const parse = function (statement){
     if (statement.toLowerCase().indexOf("create") !== -1) {
         return parseCreateStatement(statement)
     }
 }
+
+export default parse;
 
 //-----------------------------------------------------------------------------
 // TESTS
