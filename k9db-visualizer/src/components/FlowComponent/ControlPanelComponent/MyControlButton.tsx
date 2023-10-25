@@ -1,20 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { ControlButton } from "reactflow";
-import { PiUploadSimpleBold, PiCheckFatFill} from "react-icons/pi";
+import { PiUploadSimpleBold, PiCheckFatFill } from "react-icons/pi";
+import { MyModal } from "../ModalComponent/MyModal";
 
+const MyControlButton = ({ name }) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-const MyControlButton = (props) => {
   return (
     <div>
-        {props.name === 'v' ? (
-          <ControlButton  onClick={props.action} title="action">
-            <PiCheckFatFill />
-          </ControlButton>
-        ) : (
-          <ControlButton  onClick={props.action} title="action">
-            <PiUploadSimpleBold />
-          </ControlButton>
-        )}
+      {name === "v" ? (
+        <ControlButton onClick={handleShow} title="action">
+          <PiCheckFatFill />
+        </ControlButton>
+      ) : (
+        <ControlButton onClick={handleShow} title="action">
+          <PiUploadSimpleBold />
+        </ControlButton>
+      )}
+
+      {name === "v" ? (
+        <MyModal
+          show={show}
+          onHide={handleClose}
+          content={"hi"}
+          title={"Validation"}
+        />
+      ) : (
+        <MyModal
+          show={show}
+          onHide={handleClose}
+          content={"hello"}
+          title={"Input Schema"}
+        />
+      )}
     </div>
   );
 };
