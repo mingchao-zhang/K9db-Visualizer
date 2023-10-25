@@ -1,3 +1,4 @@
+// Helper Functions
 /* returns the text before the first '(', left parenthesis
    for example, "stories(id)" => "stories" and
    "users(id) => "users"
@@ -100,13 +101,81 @@ function parseCreateStatement(inputString) {
     }
     return res
   }
-  
+
+//-----------------------------------------------------------------------------
+// Parse API's
+// Given a SQL statement with K9db annotations, returns a list of objects that 
+// could either be a node (data subject) or an edge
 function parse(statement) {
     if (statement.toLowerCase().indexOf("create") !== -1) {
         return parseCreateStatement(statement)
     }
 }
 
+// Given a list of objects (nodes and edges), return [uniqueNodes, edges]
+// where uniqueNodes is a set of table names and edges are edge objects
+function getNodesAndEdges(objects) {
+    const nodes = new Set()
+    var edges = []
+    for (const obj of parsedRes) {
+        if (obj.annotation === "data_subject") {
+            nodes.add(obj.tableName)
+        } else {
+            nodes.add(obj.from)
+            nodes.add(obj.to)
+            edges.push(obj)
+        }
+    }
+    return [nodes, edges]
+}
+
+// Given a set of unique nodes and a list of edges objects, return a list of
+// lists of nodes like res = [[A], [B, C], [D]] where A (data subject) has 
+// inDegree 0, B and C have inDegree 1 and D has inDegree 2.
+// If the graph is invalid (has a cycle), returns an empty list
+function topoSort(nodes, edges) {
+    // 1. create a graph (adjacency list) and an inDegree map
+    const G = new Map();
+    const inNodes = new Map();
+    for (const node of nodes) {
+        G[node] = new Set()
+        inNodes[node] = new Set()
+    }
+    for (const edge of edges) {
+        G[edge.to].add(edge.from)
+        inNodes[edge.from].add(edge.to)
+    }
+    // 2. get all nodes that have zero dependencies
+    var q = []
+    for (const node of nodes) {
+        if (inNodes[node].size === 0) {
+            q.push(node)
+        }
+    }
+    // 3. use Khan's algorithm to construct the result array
+    const res = []
+    var processedNodeCt = 0
+    while (q.length > 0) {
+        var nextQ = []
+        for (const curr of q) {
+            processedNodeCt++
+            for (const neighbor of G[curr]) {
+                inNodes[neighbor].delete(curr)
+                if (inNodes[neighbor].size === 0) {
+                    nextQ.push(neighbor)
+                }
+            }
+        }
+        res.push(q)
+        q = nextQ
+    }
+    // 4. check if the graph is a DAG
+    if (processedNodeCt < nodes.length) {
+        return []
+    } else {
+        return res
+    }
+}
 //-----------------------------------------------------------------------------
 // TESTS
 const createStatements = [
@@ -116,7 +185,7 @@ const createStatements = [
     `CREATE TABLE stories (
         id INT PRIMARY KEY,
         title TEXT,
-        author INT NOT NULL OWNED_BY user(id) 
+        author INT NOT NULL OWNED_BY users(id) 
     );`,
     `CREATE TABLE tags (
         id INT PRIMARY KEY,
@@ -125,20 +194,25 @@ const createStatements = [
     `CREATE TABLE taggings (
         id INT PRIMARY KEY,
         story_id INT NOT NULL OWNED_BY stories(id), 
-        tag_id INT NOT NULL ACCESSES tag(id)
+        tag_id INT NOT NULL ACCESSES tags(id)
     );`,
     `CREATE TABLE messages (
         id INT PRIMARY KEY, 
         body text, 
-        sender INT NOT NULL OWNED_BY user(id), 
-        receiver INT NOT NULL OWNED_BY user(id), 
+        sender INT NOT NULL OWNED_BY users(id), 
+        receiver INT NOT NULL OWNED_BY users(id), 
         ON DEL sender ANON (sender),
         ON DEL receiver ANON (receiver)
     );`
 ]
 
+// get all objects
+var parsedRes = []
 for (const statement of createStatements) {
-    let parsedRes = parse(statement)
-    console.log(parsedRes)
+    parsedRes.push(...parse(statement))
 }
-  
+// get nodes and edges
+var [nodes, edges] = getNodesAndEdges(parsedRes)
+// topologically sort 
+var sortedNodes = topoSort(nodes, edges)
+console.log(sortedNodes)
