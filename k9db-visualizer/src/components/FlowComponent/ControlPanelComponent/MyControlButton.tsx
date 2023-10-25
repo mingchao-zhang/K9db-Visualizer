@@ -1,14 +1,20 @@
 import React from "react";
 import { ControlButton } from "reactflow";
+import { PiUploadSimpleBold, PiCheckFatFill} from "react-icons/pi";
 
-// Props : Name, Action
 
 const MyControlButton = (props) => {
   return (
     <div>
-      <ControlButton onClick={props.action} title="action">
-        <div style={{ color: "black" }}>{props.name}</div>
-      </ControlButton>
+        {props.name === 'v' ? (
+          <ControlButton  onClick={props.action} title="action">
+            <PiCheckFatFill />
+          </ControlButton>
+        ) : (
+          <ControlButton  onClick={props.action} title="action">
+            <PiUploadSimpleBold />
+          </ControlButton>
+        )}
     </div>
   );
 };
