@@ -17,7 +17,6 @@ import AccessesEdge from "./EdgeComponent/AccessesEdge";
 import AccessedByEdge from "./EdgeComponent/AccessedByEdge";
 import DataSubjectNode from "./NodeComponent/DataSubjectNode";
 import NonDataSubjectNode from "./NodeComponent/NonDataSubjectNode";
-import parse from "../../../parser/parse";
 
 const edgeTypes = {
   ownsedge: OwnsEdge,
@@ -61,17 +60,9 @@ const createStatements = [
   );`
 ]
 
-const Flow = (props) => {
+const Flow = () => {
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const parseRes = []
-  
-  for (const statement of createStatements) {
-    let res = parse(statement);
-    parseRes.push(res)
-  }
-  props.setFinished(true)
-  console.log(parseRes)
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
