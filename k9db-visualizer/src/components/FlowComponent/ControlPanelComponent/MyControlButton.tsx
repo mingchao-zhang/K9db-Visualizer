@@ -7,6 +7,7 @@ const MyControlButton = ({ name }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [schema, setSchema] = useState("");
 
   return (
     <div>
@@ -26,13 +27,19 @@ const MyControlButton = ({ name }) => {
           onHide={handleClose}
           content={"hi"}
           title={"Validation"}
+          schema={schema}
+          handleSchema={setSchema}
+          useSchema={false}
         />
       ) : (
         <MyModal
+          schema={schema}
           show={show}
           onHide={handleClose}
           content={"hello"}
           title={"Input Schema"}
+          handleSchema={setSchema}
+          useSchema={true}
         />
       )}
     </div>

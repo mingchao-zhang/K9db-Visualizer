@@ -5,8 +5,8 @@ import { Controls } from "reactflow";
 function ControlPanel() {
   return (
     <Controls>
-      <MyControlButton name="s" action={() => console.log("schema")} />
-      <MyControlButton name="v" action={() => console.log("validate")} />
+      <MyControlButton name="s" />
+      <MyControlButton name="v" />
     </Controls>
   );
 }
