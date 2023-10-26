@@ -1,5 +1,6 @@
 .mymodal {
-    position: absolute;
+    position: relative;
+    left: -30%;
     z-index: 1000;
     display: block;
     border: 0;
@@ -8,8 +9,6 @@
     min-height: 150px;
     width: fit-content;
     height: fit-content;
-    left: 40%;
-    top: 35%;
     border-radius: 4px;
     padding: 0.25em 0.5em;
     box-shadow: 1px 1px 0px 0px #423E37, 2px 2px 0px 0px #423E37, 3px 3px 0px 0px #423E37, 4px 4px 0px 0px #423E37, 5px 5px 0px 0px #423E37;
@@ -33,19 +32,19 @@
     font-size: 24px;
     letter-spacing: 1px;
     font-family: "Gill Sans", sans-serif;
-    padding-top: 8%;
+    padding-top: 5%;
+    padding-bottom: 10%;
+    width: 100%;
 }
 
 
 .btn-mymodalbutton {
-    position: absolute;
+    position: relative;
     left: 50%;
-    top: 81%;
     transform: translate(-50%, -50%);
     font-size: 14px;
     font-family: "Gill Sans", sans-serif;
     text-align: center;
-    padding: 5px;
     border-radius: 4px;
     font-size: 14px;
     transition: 200ms;

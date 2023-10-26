@@ -2,11 +2,21 @@ import React, { useState } from "react";
 import { ControlButton } from "reactflow";
 import { PiUploadSimpleBold, PiCheckFatFill } from "react-icons/pi";
 import { MyModal } from "../ModalComponent/MyModal";
+import parse from "../../../../parser/parse"
 
 const MyControlButton = ({ name }) => {
   const [show, setShow] = useState(false);
+  const [schema, setSchema] = useState("");
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleSchema = (schema) => setSchema(schema);
+
+  const handleSubmit = () => {
+    setShow(false);
+    let input = JSON.stringify(schema.content);
+    console.log(parse(input))
+  };
 
   return (
     <div>
@@ -26,13 +36,19 @@ const MyControlButton = ({ name }) => {
           onHide={handleClose}
           content={"hi"}
           title={"Validation"}
+          schema={schema}
+          handleSchema={handleSchema}
+          useSchema={false}
         />
       ) : (
         <MyModal
+          schema={schema}
           show={show}
-          onHide={handleClose}
+          onHide={handleSubmit}
           content={"hello"}
           title={"Input Schema"}
+          handleSchema={handleSchema}
+          useSchema={true}
         />
       )}
     </div>
