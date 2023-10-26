@@ -16,7 +16,6 @@ export const MyModal = ({
     <div>
       <Modal className="mymodal" show={show} onHide={onHide}>
         <div className="mymodaltitle">{title}</div>
-
         {useSchema && (
           <SchemaFrom schema={schema} handleSchema={handleSchema}></SchemaFrom>
         )}

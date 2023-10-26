@@ -30,8 +30,6 @@ const nodeTypes = {
   nondatasubjectnode: NonDataSubjectNode,
 };
 
-
-
 const createStatements = [
   `CREATE DATA_SUBJECT TABLE users (
       id INT PRIMARY KEY
@@ -57,8 +55,8 @@ const createStatements = [
       receiver INT NOT NULL OWNED_BY user(id), 
       ON DEL sender ANON (sender),
       ON DEL receiver ANON (receiver)
-  );`
-]
+  );`,
+];
 
 const Flow = () => {
   const [nodes, , onNodesChange] = useNodesState(initialNodes);

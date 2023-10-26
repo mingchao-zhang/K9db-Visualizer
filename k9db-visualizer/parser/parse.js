@@ -105,6 +105,7 @@ const parse = function (statement){
     if (statement.toLowerCase().indexOf("create") !== -1) {
         return parseCreateStatement(statement)
     }
+    return "not valid"
 }
 
 export default parse;
@@ -139,8 +140,8 @@ const createStatements = [
     );`
 ]
 
-for (const statement of createStatements) {
-    let parsedRes = parse(statement)
-    console.log(parsedRes)
-}
+// for (const statement of createStatements) {
+//     let parsedRes = parse(statement)
+//     console.log(parsedRes)
+// }
   
