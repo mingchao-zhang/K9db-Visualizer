@@ -17,7 +17,7 @@ export const MyModal = ({
       <Modal className="mymodal" show={show} onHide={onHide}>
         <div className="mymodaltitle">{title}</div>
         {useSchema && (
-          <SchemaFrom schema={schema} handleSchema={handleSchema}></SchemaFrom>
+          <SchemaFrom schema={schema} handleSchema={handleSchema} />
         )}
         {useSchema && (
           <Button variant="mymodalbutton" onClick={onHide}>
@@ -25,14 +25,16 @@ export const MyModal = ({
           </Button>
         )}
 
-        {!useSchema && <div className="mymodalbody">{content}</div>}
-        <Modal.Footer>
-          {!useSchema && (
+        {!useSchema && <span className="mymodalbody">{content}</span>}
+        {!useSchema && (
+          <div>
+            <br />
+            <br />
             <Button variant="mymodalbutton" onClick={onHide}>
               Close
             </Button>
-          )}
-        </Modal.Footer>
+          </div>
+        )}
       </Modal>
     </div>
   );

@@ -9,20 +9,23 @@ export const SchemaFrom = ({ schema, handleSchema }) => {
 
   return (
     <Form className="form">
-      <Form.Group controlId="formSchema">
-        <Form.Control
-          className="inputbox"
-          type="text"
-          placeholder="Please input the schema here..."
-          as="textarea"
-          rows={20}
-          cols={53}
-          spellCheck={false}
-          onChange={onChange}
-          value={schema.schema}
-        />
-      </Form.Group>
-      <div style={{ paddingTop: "2%" }}>We'll never store your schema.</div>
+      <Form.Control
+        className="inputbox"
+        type="text"
+        placeholder="Please input the schema here..."
+        as="textarea"
+        rows={20}
+        cols={52}
+        spellCheck={false}
+        onChange={onChange}
+        value={schema.schema}
+      />
+      <br />
+      <span
+        style={{ paddingTop: "2%", maxWidth: "175%", minWidth: "fit-content" }}
+      >
+        We'll never store your schema.
+      </span>
     </Form>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ControlButton } from "reactflow";
 import { PiUploadSimpleBold, PiCheckFatFill } from "react-icons/pi";
 import { MyModal } from "../ModalComponent/MyModal";
-import parse from "../../../../parser/parse"
+import parse from "../../../../parser/parse";
 
 const MyControlButton = ({ name }) => {
   const [show, setShow] = useState(false);
@@ -15,7 +15,7 @@ const MyControlButton = ({ name }) => {
   const handleSubmit = () => {
     setShow(false);
     let input = JSON.stringify(schema.content);
-    console.log(parse(input))
+    console.log(parse(input));
   };
 
   return (
@@ -34,7 +34,9 @@ const MyControlButton = ({ name }) => {
         <MyModal
           show={show}
           onHide={handleClose}
-          content={"hi"}
+          content={
+            "hi. Your schema is invalid. Please check the following edges"
+          }
           title={"Validation"}
           schema={schema}
           handleSchema={handleSchema}
