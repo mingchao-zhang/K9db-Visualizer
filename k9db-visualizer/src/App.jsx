@@ -50,11 +50,11 @@ export default function App() {
 
   return (
     <div>
-      <div class="split left">
+      <div className="split left">
         <MyCollapse />
       </div>
 
-      <div class="split right">
+      <div className="split right">
         <Flow />
       </div>
     </div>
