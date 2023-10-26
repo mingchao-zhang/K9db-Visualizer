@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 import Flow from "./components/FlowComponent/Flow";
 import MyCollapse from "./components/MenuComponent/Collapse";
 
 export default function App() {
+
+  const [selectedItem, setSelectedItem] = useState("");
 
   const parserRes = [[ { annotation: 'data_subject', tableName: 'users' } ],
   [
