@@ -58,7 +58,7 @@ const createStatements = [
   );`,
 ];
 
-const Flow = () => {
+const Flow = ({ handleParsedSchema }) => {
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
@@ -81,7 +81,7 @@ const Flow = () => {
         fitView
         attributionPosition="top-right"
       >
-        <ControlPanel />
+        <ControlPanel handleParsedSchema={handleParsedSchema} />
         <MiniMap
           nodeColor={(n) => {
             if (n.type === "datasubjectnode") return "#423E37";

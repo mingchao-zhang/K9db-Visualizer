@@ -1,54 +1,25 @@
 import React, { useState } from "react";
 import "./App.css";
-
 import Flow from "./components/FlowComponent/Flow";
 import MyCollapse from "./components/MenuComponent/Collapse";
+import splitTablesEdges from "./components/UtilComponent/SplitTablesEdges";
 
 export default function App() {
-
   const [selectedItem, setSelectedItem] = useState("");
+  const [parsedSchema, setParsedSchema] = useState("");
+  const [datasubject, setDatasubject] = useState([]);
+  const [otherTables, setOtherTables] = useState([]);
+  const [edges, setEdges] = useState([]);
+  
+  const handleParsedSchema = (parsedSchema) => {
+    setParsedSchema(parsedSchema);
+    console.log(parsedSchema);
 
-  const parserRes = [[ { annotation: 'data_subject', tableName: 'users' } ],
-  [
-    {
-      annotation: 'owned_by',
-      from: 'stories',
-      to: 'user',
-      edgeName: 'author'
-    }
-  ],
-  [],
-  [
-    {
-      annotation: 'owned_by',
-      from: 'taggings',
-      to: 'stories',
-      edgeName: 'story_id'
-    },
-    {
-      annotation: 'accesses',
-      from: 'tag',
-      to: 'taggings',
-      edgeName: 'tag_id'
-    }
-  ],
-  [
-    {
-      annotation: 'owned_by',
-      from: 'messages',
-      to: 'user',
-      edgeName: 'sender'
-    },
-    {
-      annotation: 'owned_by',
-      from: 'messages',
-      to: 'user',
-      edgeName: 'receiver'
-    }
-  ]]
-
-  const dataSubject = ['users'];
-  const otherTables = ['messages', 'taggings', 'tags', 'stories'];
+    let res = splitTablesEdges(parsedSchema);
+    setDatasubject(res[0]);
+    setOtherTables(res[1]);
+    setEdges(res[2]);
+  };
 
   return (
     <div>
@@ -57,7 +28,7 @@ export default function App() {
       </div>
 
       <div className="split right">
-        <Flow />
+        <Flow handleParsedSchema={handleParsedSchema} />
       </div>
     </div>
   );
