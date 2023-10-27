@@ -2,11 +2,11 @@ import React from "react";
 import MyControlButton from "./MyControlButton";
 import { Controls } from "reactflow";
 
-function ControlPanel() {
+function ControlPanel({ handleParsedSchema }) {
   return (
     <Controls>
-      <MyControlButton name="s" />
-      <MyControlButton name="v" />
+      <MyControlButton name="s" handleParsedSchema={handleParsedSchema} />
+      <MyControlButton name="v" handleParsedSchema={handleParsedSchema} />
     </Controls>
   );
 }

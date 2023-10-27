@@ -4,7 +4,7 @@ import { PiUploadSimpleBold, PiCheckFatFill } from "react-icons/pi";
 import { MyModal } from "../ModalComponent/MyModal";
 import parse from "../../../../parser/parse";
 
-const MyControlButton = ({ name }) => {
+const MyControlButton = ({ name, handleParsedSchema }) => {
   const [show, setShow] = useState(false);
   const [schema, setSchema] = useState("");
 
@@ -15,7 +15,9 @@ const MyControlButton = ({ name }) => {
   const handleSubmit = () => {
     setShow(false);
     let input = JSON.stringify(schema.content);
+    let res = parse(input);
     console.log(parse(input));
+    handleParsedSchema(res);
   };
 
   return (
