@@ -28,8 +28,8 @@ const edgeStyle = {
   strokeWidth: 1.2,
 };
 
-const Edges = () => {
-  return [
+const Edges = function (edges: any[]) {
+  const ret = [
     {
       id: "edges-e1-2",
       source: "1",
@@ -63,6 +63,10 @@ const Edges = () => {
       style: edgeStyle,
     },
   ];
+
+  if (edges.length === 0) {
+    return ret;
+  }
 };
 
 export default Edges;
