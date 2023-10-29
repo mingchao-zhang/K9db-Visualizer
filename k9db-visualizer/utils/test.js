@@ -1,4 +1,5 @@
 import { parse } from './parse.js';
+import { getGraph, topoSort } from './graph.js';
 
 const createStatements = [
     `CREATE DATA_SUBJECT TABLE users (
@@ -29,11 +30,8 @@ const createStatements = [
 ]
 
 // get all objects
-var parsedRes = parse(createStatements)
-
-console.log(parsedRes)
-// get nodes and edges
-var [nodes, edges] = getNodesAndEdges(parsedRes)
-// topologically sort 
-var sortedNodes = topoSort(nodes, edges)
+var parsedObjects = parse(createStatements)
+const graph = getGraph(parsedObjects)
+console.log(graph)
+var sortedNodes = topoSort(graph)
 console.log(sortedNodes)

@@ -7,8 +7,9 @@ export const Annotations = {
 }
 
 export class Node {
-    constructor(tableName) {
+    constructor(tableName, isDataSubject) {
         this.tableName = tableName
+        this.isDataSubject = isDataSubject
     }
 }
 
