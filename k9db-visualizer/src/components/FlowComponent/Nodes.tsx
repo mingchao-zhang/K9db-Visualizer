@@ -1,5 +1,5 @@
 const Nodes = function (dataSubject: String[], otherTables: String[]) {
-  const nodes = [
+  const initNodes = [
     {
       id: "1",
       type: "datasubjectnode",
@@ -31,31 +31,39 @@ const Nodes = function (dataSubject: String[], otherTables: String[]) {
       position: { x: 400, y: 300 },
     },
   ];
-
   if (dataSubject.length === 0) {
-    return nodes;
+    return initNodes;
   }
 
-  let ret: any[] = [];
-  for (const sub of dataSubject) {
-    ret.push({
-      id: sub,
-      type: "datasubjectnode",
-      data: { label: sub, handleCount: 2 },
-      // position: { x: 250, y: 0 },
-    });
-  }
-
-  for (const sub of otherTables) {
-    ret.push({
-      id: sub,
+  return [
+    {
+      id: "5",
       type: "nondatasubjectnode",
-      data: { label: sub, handleCount: 2 },
-      // position: { x: 400, y: 300 },
-    });
-  }
+      data: { label: "example_table4", handleCount: 2 },
+      position: { x: 400, y: 300 },
+    },
+  ];
 
-  return ret;
+  // let ret: any[] = [];
+  // for (const sub of dataSubject) {
+  //   ret.push({
+  //     id: sub,
+  //     type: "datasubjectnode",
+  //     data: { label: sub, handleCount: 2 },
+  //     // position: { x: 250, y: 0 },
+  //   });
+  // }
+
+  // for (const sub of otherTables) {
+  //   ret.push({
+  //     id: sub,
+  //     type: "nondatasubjectnode",
+  //     data: { label: sub, handleCount: 2 },
+  //     // position: { x: 400, y: 300 },
+  //   });
+  // }
+
+  // return ret;
 };
 
 export default Nodes;

@@ -1,5 +1,4 @@
 import { MarkerType } from "reactflow";
-
 const ownsMarkerEnd = {
   type: MarkerType.ArrowClosed,
   width: 18,
@@ -24,12 +23,12 @@ const accessedbyMarkerEnd = {
   height: 20,
 };
 
-const edgeStyle = {
-  strokeWidth: 1.2,
-};
-
 const Edges = function (edges: any[]) {
-  const ret = [
+  const edgeStyle = {
+    strokeWidth: 1.2,
+  };
+
+  const initEdges = [
     {
       id: "edges-e1-2",
       source: "1",
@@ -63,9 +62,8 @@ const Edges = function (edges: any[]) {
       style: edgeStyle,
     },
   ];
-
   if (edges.length === 0) {
-    return ret;
+    return initEdges;
   }
 };
 

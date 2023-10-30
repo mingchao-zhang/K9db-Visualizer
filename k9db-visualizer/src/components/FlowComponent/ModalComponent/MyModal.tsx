@@ -17,7 +17,7 @@ export const MyModal = ({
       <Modal className="mymodal" show={show} onHide={onHide}>
         <div className="mymodaltitle">{title}</div>
         {useSchema && (
-          <SchemaFrom schema={schema} handleSchema={handleSchema} />
+          <SchemaFrom schema={schema} handleSchema={handleSchema}/>
         )}
         {useSchema && (
           <Button variant="mymodalbutton" onClick={onHide}>

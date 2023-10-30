@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Flow from "./components/FlowComponent/Flow";
 import MyCollapse from "./components/MenuComponent/Collapse";
@@ -10,7 +10,7 @@ export default function App() {
   const [datasubject, setDatasubject] = useState([]);
   const [otherTables, setOtherTables] = useState([]);
   const [edges, setEdges] = useState([]);
-  
+
   const handleParsedSchema = (parsedSchema) => {
     setParsedSchema(parsedSchema);
     console.log(parsedSchema);
@@ -28,7 +28,12 @@ export default function App() {
       </div>
 
       <div className="split right">
-        <Flow handleParsedSchema={handleParsedSchema} />
+        <Flow
+          handleParsedSchema={handleParsedSchema}
+          parsedDataSubject={datasubject}
+          parsedEdges={edges}
+          parsedOtherTables={otherTables}
+        />
       </div>
     </div>
   );

@@ -3,8 +3,10 @@ import { ControlButton } from "reactflow";
 import { PiUploadSimpleBold, PiCheckFatFill } from "react-icons/pi";
 import { MyModal } from "../ModalComponent/MyModal";
 import parse from "../../../../parser/parse";
+import splitTablesEdges from "../../UtilComponent/SplitTablesEdges";
 
-const MyControlButton = ({ name, handleParsedSchema }) => {
+
+const MyControlButton = ({ name, handleParsedSchema, handleStateChange}) => {
   const [show, setShow] = useState(false);
   const [schema, setSchema] = useState("");
 
@@ -15,9 +17,13 @@ const MyControlButton = ({ name, handleParsedSchema }) => {
   const handleSubmit = () => {
     setShow(false);
     let input = JSON.stringify(schema.content);
-    let res = parse(input);
+    let parsedSchema = parse(input);
     console.log(parse(input));
-    handleParsedSchema(res);
+    handleParsedSchema(parsedSchema);
+
+    let splitRes = splitTablesEdges(parsedSchema);
+    console.log(splitRes)
+    handleStateChange(splitRes[0], splitRes[1], splitRes[2])
   };
 
   return (
