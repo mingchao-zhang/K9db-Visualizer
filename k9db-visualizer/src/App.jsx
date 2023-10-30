@@ -10,7 +10,7 @@ export default function App() {
   const [datasubject, setDatasubject] = useState([]);
   const [otherTables, setOtherTables] = useState([]);
   const [edges, setEdges] = useState([]);
-  
+
   const handleParsedSchema = (parsedSchema) => {
     setParsedSchema(parsedSchema);
     console.log(parsedSchema);
@@ -19,12 +19,17 @@ export default function App() {
     setDatasubject(res[0]);
     setOtherTables(res[1]);
     setEdges(res[2]);
+    console.log(edges);
   };
 
   return (
     <div>
       <div className="split left">
-        <MyCollapse />
+        <MyCollapse
+          datasubject={datasubject}
+          otherTables={otherTables}
+          edges={edges}
+        />
       </div>
 
       <div className="split right">
