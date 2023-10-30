@@ -24,14 +24,6 @@ export function getGraph(parsedObjects) {
     return G
 }
 
-// Map(0) {
-//     users: Set(2) { 'stories', 'messages' },
-//     stories: Set(1) { 'taggings' },
-//     taggings: Set(1) { 'tags' },
-//     tags: Set(0) {},
-//     messages: Set(0) {}
-//   }
-
 
 /* Given a set of unique nodes and a list of edges objects, return a list of
 lists of nodes like res = [[A], [B, C], [D]] where A (data subject) has 

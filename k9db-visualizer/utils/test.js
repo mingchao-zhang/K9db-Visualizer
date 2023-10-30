@@ -1,5 +1,6 @@
 import { parse } from './parse.js';
 import { getGraph, topoSort } from './graph.js';
+import { calculateCoordinates } from './coordinate.js'
 
 const createStatements = [
     `CREATE DATA_SUBJECT TABLE users (
@@ -29,9 +30,15 @@ const createStatements = [
     );`
 ]
 
-// get all objects
+// get graph and topologically-sorted nodes
 var parsedObjects = parse(createStatements)
-const graph = getGraph(parsedObjects)
-console.log(graph)
+var graph = getGraph(parsedObjects)
 var sortedNodes = topoSort(graph)
+console.log(graph)
 console.log(sortedNodes)
+
+// calculate coordinates
+var canvasWidth = 1000
+var canvasHeight = 1000
+var coords = calculateCoordinates(sortedNodes, graph, canvasWidth, canvasHeight)
+console.log(coords)
