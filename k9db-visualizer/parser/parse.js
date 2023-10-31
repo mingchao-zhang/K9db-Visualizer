@@ -110,7 +110,6 @@ const parseHelper = function (statement) {
 
 const parse = function (input){
     let createStatements = input.split(/(?=CREATE)/).map(statement => statement.replace(/\\n/g, ''));
-    console.log(createStatements);
     let res = []
     for (const statement of createStatements) {
         let parsedRes = parseHelper(statement)
@@ -125,7 +124,7 @@ export default parse;
 
 //-----------------------------------------------------------------------------
 // TESTS
-const input = `CREATE DATA_SUBJECT TABLE users (
+const input = `CREATE DATA_SUBJECT TABLE user (
     id INT PRIMARY KEY
 ); CREATE TABLE stories (
     id INT PRIMARY KEY,
@@ -142,7 +141,7 @@ const input = `CREATE DATA_SUBJECT TABLE users (
     id INT PRIMARY KEY, 
     body text, 
     sender INT NOT NULL OWNED_BY user(id), 
-    receiver INT NOT NULL OWNED_BY user(id), 
+    receiver INT NOT NULL ACCESSED_BY user(id), 
     ON DEL sender ANON (sender),
     ON DEL receiver ANON (receiver)
 );

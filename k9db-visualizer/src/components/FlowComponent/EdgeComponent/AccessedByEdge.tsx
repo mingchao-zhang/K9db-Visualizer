@@ -3,7 +3,9 @@ import {
   BaseEdge,
   EdgeLabelRenderer,
   EdgeProps,
+  ReactFlowState,
   getBezierPath,
+  useStore,
 } from "reactflow";
 
 import "./edge.css";
@@ -21,7 +23,7 @@ export default function AccessedByEdge({
   sourcePosition,
   targetPosition,
   style = {},
-  markerEnd
+  markerEnd,
 }: EdgeProps) {
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX,
@@ -32,15 +34,9 @@ export default function AccessedByEdge({
     targetPosition,
   });
 
- 
-
   return (
     <>
-      <BaseEdge
-        path={edgePath}
-        markerEnd={markerEnd}
-        style={style}
-      />
+      <BaseEdge path={edgePath} markerEnd={markerEnd} style={style} />
       <EdgeLabelRenderer>
         <div
           style={{
