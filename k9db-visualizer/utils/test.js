@@ -29,8 +29,19 @@ const createStatements =
         ON DEL receiver ANON (receiver)
     );`
 
+const testCase2 = `
+CREATE DATA_SUBJECT TABLE user (id INT PRIMARY KEY, ...);
+CREATE TABLE group (id INT PRIMARY KEY, title TEXT, ...);
+CREATE TABLE member (
+    id INT PRIMARY KEY, uid INT NOT NULL OWNED_BY user(id), gid INT NOT NULL OWNS group(id)
+    );
+    CREATE TABLE share (
+        id INT PRIMARY KEY,
+uid_owner INT NOT NULL OWNED_BY user(id), share_with INT ACCESSED_BY user(id), share_with_group INT ACCESSED_BY group(id));
+`
 // get graph and topologically-sorted nodes
 var parsedObjects = parse(createStatements)
+console.log(parsedObjects)
 var graph = getGraph(parsedObjects)
 var sortedNodes = topoSort(graph)
 console.log(graph)

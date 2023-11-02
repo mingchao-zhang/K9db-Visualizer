@@ -7,14 +7,14 @@ export default function NonDataSubjectnode({ data }: NodeProps) {
     <>
       <Handle
         type="target"
-        position={Position.Top}
+        position={Position.Bottom}
         style={{ background: "#555" }}
         isConnectable={false}
       />
       <div className="datasubjectnode">{data.label}</div>
       <Handle
         type="source"
-        position={Position.Bottom}
+        position={Position.Top}
         style={{ background: "#555" }}
         isConnectable={false}
       />

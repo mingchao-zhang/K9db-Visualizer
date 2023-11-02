@@ -37,7 +37,6 @@ export const edgeStyle = {
   strokeWidth: 1.2,
 };
 
-
 const ownsMarkerEnd = {
   type: MarkerType.ArrowClosed,
   width: 18,
@@ -65,32 +64,32 @@ const accessedbyMarkerEnd = {
 export const initEdges = [
   {
     id: "edges-e1-2",
-    source: "1",
-    target: "2",
+    source: "2",
+    target: "1",
     type: "ownsedge",
     markerEnd: ownsMarkerEnd,
     style: edgeStyle,
   },
   {
     id: "edges-e2-2a",
-    source: "2",
-    target: "3",
+    source: "3",
+    target: "2",
     type: "ownedbyedge",
     markerEnd: ownedbyMarkerEnd,
     style: edgeStyle,
   },
   {
     id: "edges-e2-3",
-    source: "2",
-    target: "4",
+    source: "4",
+    target: "2",
     type: "accessesedge",
     markerEnd: accessesMarkerEnd,
     style: edgeStyle,
   },
   {
     id: "edges-e3-4",
-    source: "4",
-    target: "5",
+    source: "5",
+    target: "4",
     type: "accessedbyedge",
     markerEnd: accessedbyMarkerEnd,
     style: edgeStyle,
@@ -106,7 +105,7 @@ const Edges = function (edges: any[]) {
   for (const e of edges) {
     ret.push({
       id: e.from + "_" + e.annotation + "_" + e.edgeName,
-      sourceHandle: 's1',
+      sourceHandle: "s1",
       source: e.from,
       target: e.to,
       type: getFlowEdgeType(e.annotation),

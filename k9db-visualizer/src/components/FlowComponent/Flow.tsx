@@ -18,7 +18,6 @@ import AccessesEdge from "./EdgeComponent/AccessesEdge";
 import AccessedByEdge from "./EdgeComponent/AccessedByEdge";
 import DataSubjectNode from "./NodeComponent/DataSubjectNode";
 import NonDataSubjectNode from "./NodeComponent/NonDataSubjectNode";
-import { Button } from "react-bootstrap";
 
 const edgeTypes = {
   ownsedge: OwnsEdge,

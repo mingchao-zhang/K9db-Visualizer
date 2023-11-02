@@ -1,4 +1,17 @@
+import { getGraph, topoSort } from "../../../utils/graph.js";
+import { calculateCoordinates } from "../../../utils/coordinate.js";
+
 const splitTablesEdges = function (parsedSchema) {
+  var graph = getGraph(parsedSchema);
+  var sortedNodes = topoSort(graph);
+  var canvasWidth = 1000;
+  var canvasHeight = 1000;
+  var coordsMap = calculateCoordinates(
+    sortedNodes,
+    graph,
+    canvasWidth,
+    canvasHeight
+  );
   let dataSubjects: any[] = [];
   let otherTables: any[] = [];
 
@@ -23,7 +36,21 @@ const splitTablesEdges = function (parsedSchema) {
       }
     }
   }
-  return [dataSubjects, otherTables, edges];
+
+  let dsRes: any[] = [];
+  let otRes: any[] = [];
+  console.log(coordsMap);
+  for (const [key, value] of Object.entries(coordsMap)) {
+    console.log(key);
+    console.log(value);
+    if (dataSubjects.includes(key)) {
+      dsRes.push(value);
+    } else {
+      otRes.push(value);
+    }
+  }
+
+  return [dsRes, otRes, edges];
 };
 
 export default splitTablesEdges;

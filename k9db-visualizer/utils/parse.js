@@ -108,7 +108,6 @@ returns a list of Node and Edge objects. If any statement is invalid,
 empty array will be returned. */
 export default function parse(input) {
     let statements = input.split(/(?=CREATE)/).map(statement => statement.replace(/\\n/g, ''));
-    console.log(statements)
     var res = []
     for (const statement of statements) {
         if (statement.toLowerCase().indexOf("create") !== -1) {

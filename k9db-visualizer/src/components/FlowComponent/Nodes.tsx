@@ -31,7 +31,7 @@ const initNodes = [
   },
 ];
 
-const Nodes = function (dataSubject: String[], otherTables: String[]) {
+const Nodes = function (dataSubject: any[], otherTables: any[]) {
   if (dataSubject.length === 0) {
     return initNodes;
   }
@@ -39,24 +39,20 @@ const Nodes = function (dataSubject: String[], otherTables: String[]) {
   let ret: any[] = [];
   for (const sub of dataSubject) {
     ret.push({
-      id: sub,
+      id: sub.tableName,
       type: "datasubjectnode",
-      data: { label: sub, handleCount: 2 },
-      position: { x: 250, y: 0 },
+      data: { label: sub.tableName, handleCount: 2 },
+      position: { x: sub.posX, y: sub.posY },
     });
   }
 
-  let x = 0
-  let y = 100
   for (const sub of otherTables) {
     ret.push({
-      id: sub,
+      id: sub.tableName,
       type: "nondatasubjectnode",
-      data: { label: sub, handleCount: 2 },
-      position: { x: x, y: y },
+      data: { label: sub.tableName, handleCount: 2 },
+      position: { x: sub.posX, y: sub.posY },
     });
-    x += 100
-    y += 50
   }
 
   return ret;
