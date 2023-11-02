@@ -76,16 +76,16 @@ function parseCreateStatement(inputString) {
         return [{
             annotation: "data_subject",
             tableName: tableName
-          }];
+        }];
     }
-  
+
     // 3: Extract text between the first '(' and the last ')'
     //    Split the text by comma (',')
     const firstParenIdx = inputString.indexOf('(')
     const lastParenIdx = inputString.lastIndexOf(')')
-    if (firstParenIdx === -1 || lastParenIdx === -1 || 
+    if (firstParenIdx === -1 || lastParenIdx === -1 ||
         lastParenIdx <= firstParenIdx) {
-      return null; // No valid match found
+        return null; // No valid match found
     }
     const textBetween = inputString.substring(firstParenIdx + 1, lastParenIdx);
     const splitText = textBetween.split(',');
@@ -99,28 +99,16 @@ function parseCreateStatement(inputString) {
         }
     }
     return res
-  }
-
-const parse = function (input){
-    let createStatements = input.split(/(?=CREATE)/).map(statement => statement.replace(/\\n/g, ''));
-    let res = []
-    for (const statement of createStatements) {
-        let parsedRes = parseHelper(statement)
-        if (parsedRes.length !== 0){
-            res.push(parsedRes)
-        }
-    }
-    return res
 }
-
-export default parse;
 
 //-----------------------------------------------------------------------------
 /* Parse API
 Given an array of SQL create statements with K9db annotations, 
 returns a list of Node and Edge objects. If any statement is invalid, 
 empty array will be returned. */
-export function parser(statements) {
+export default function parse(input) {
+    let statements = input.split(/(?=CREATE)/).map(statement => statement.replace(/\\n/g, ''));
+    console.log(statements)
     var res = []
     for (const statement of statements) {
         if (statement.toLowerCase().indexOf("create") !== -1) {

@@ -1,26 +1,26 @@
-import { parser } from './parse.js';
+import parse from './parse.js';
 import { getGraph, topoSort } from './graph.js';
 import { calculateCoordinates } from './coordinate.js'
 
-const createStatements = [
+const createStatements =
     `CREATE DATA_SUBJECT TABLE users (
         id INT PRIMARY KEY
-    );`,
-    `CREATE TABLE stories (
+    );
+    CREATE TABLE stories (
         id INT PRIMARY KEY,
         title TEXT,
         author INT NOT NULL OWNED_BY users(id) 
-    );`,
-    `CREATE TABLE tags (
+    );
+    CREATE TABLE tags (
         id INT PRIMARY KEY,
         tag TEXT
-    );`,
-    `CREATE TABLE taggings (
+    );
+    CREATE TABLE taggings (
         id INT PRIMARY KEY,
         story_id INT NOT NULL OWNED_BY stories(id), 
         tag_id INT NOT NULL ACCESSES tags(id)
-    );`,
-    `CREATE TABLE messages (
+    );
+    CREATE TABLE messages (
         id INT PRIMARY KEY, 
         body text, 
         sender INT NOT NULL OWNED_BY users(id), 
@@ -28,10 +28,9 @@ const createStatements = [
         ON DEL sender ANON (sender),
         ON DEL receiver ANON (receiver)
     );`
-]
 
 // get graph and topologically-sorted nodes
-var parsedObjects = parser(createStatements)
+var parsedObjects = parse(createStatements)
 var graph = getGraph(parsedObjects)
 var sortedNodes = topoSort(graph)
 console.log(graph)

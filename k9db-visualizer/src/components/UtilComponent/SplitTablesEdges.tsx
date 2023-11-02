@@ -6,30 +6,20 @@ const splitTablesEdges = function (parsedSchema) {
   let edges: any[] = [];
 
   for (const row of parsedSchema) {
-    for (const nestedRow of row) {
-      if (nestedRow.annotation === "data_subject") {
-        dataSubjects.push(nestedRow.tableName);
-      } else {
-        edges.push(nestedRow);
-      }
+    if (row.annotation === "data_subject") {
+      dataSubjects.push(row.tableName);
+    } else {
+      edges.push(row);
     }
   }
 
   for (const row of parsedSchema) {
-    for (const nestedRow of row) {
-      if (nestedRow.annotation !== "data_subject") {
-        if (
-          !dataSubjects.includes(nestedRow.from) &&
-          !otherTables.includes(nestedRow.from)
-        ) {
-          otherTables.push(nestedRow.from);
-        }
-        if (
-          !dataSubjects.includes(nestedRow.to) &&
-          !otherTables.includes(nestedRow.to)
-        ) {
-          otherTables.push(nestedRow.to);
-        }
+    if (row.annotation !== "data_subject") {
+      if (!dataSubjects.includes(row.from) && !otherTables.includes(row.from)) {
+        otherTables.push(row.from);
+      }
+      if (!dataSubjects.includes(row.to) && !otherTables.includes(row.to)) {
+        otherTables.push(row.to);
       }
     }
   }
