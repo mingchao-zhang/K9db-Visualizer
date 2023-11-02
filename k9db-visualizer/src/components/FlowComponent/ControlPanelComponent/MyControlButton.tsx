@@ -3,7 +3,7 @@ import { ControlButton } from "reactflow";
 import { PiUploadSimpleBold, PiCheckFatFill } from "react-icons/pi";
 import { MyModal } from "../ModalComponent/MyModal";
 import parse from "../../../../utils/parse";
-import splitTablesEdges from "../../UtilComponent/SplitTablesEdges";
+import splitTablesEdges from "../../../../utils/splitTableEdges";
 
 const MyControlButton = ({ name, handleParsedSchema, handleStateChange }) => {
   const [show, setShow] = useState(false);

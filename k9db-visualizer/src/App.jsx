@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Flow from "./components/FlowComponent/Flow";
 import MyCollapse from "./components/MenuComponent/Collapse";
-import splitTablesEdges from "./components/UtilComponent/SplitTablesEdges";
+import splitTablesEdges from "../utils/splitTableEdges"
 
 export default function App() {
   const [selectedItem, setSelectedItem] = useState("");

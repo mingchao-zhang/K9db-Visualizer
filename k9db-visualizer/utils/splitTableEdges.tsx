@@ -1,5 +1,5 @@
-import { getGraph, topoSort } from "../../../utils/graph.js";
-import { calculateCoordinates } from "../../../utils/coordinate.js";
+import { getGraph, topoSort } from "./graph.js";
+import { calculateCoordinates } from "./coordinate.js";
 
 const splitTablesEdges = function (parsedSchema) {
   var graph = getGraph(parsedSchema);
