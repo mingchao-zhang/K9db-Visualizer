@@ -19,12 +19,23 @@ export default function App() {
     setDatasubject(res[0]);
     setOtherTables(res[1]);
     setEdges(res[2]);
+    console.log(edges);
+  };
+
+  const handleSelectedItem = (selectedItem) => {
+    setSelectedItem(selectedItem);
+    console.log(selectedItem);
   };
 
   return (
     <div>
       <div className="split left">
-        <MyCollapse />
+        <MyCollapse
+          datasubject={datasubject}
+          otherTables={otherTables}
+          edges={edges}
+          handleSelectedItem={handleSelectedItem}
+        />
       </div>
 
       <div className="split right">
