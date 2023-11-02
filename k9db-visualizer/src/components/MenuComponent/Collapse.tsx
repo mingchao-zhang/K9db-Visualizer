@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./menu.css";
 
-function MyCollapse({ datasubject, otherTables, edges }) {
+function MyCollapse({ datasubject, otherTables, edges, handleSelectedItem }) {
   const [openDS, setOpenDS] = useState(false);
   const [openT, setOpenT] = useState(false);
   const [openE, setOpenE] = useState(false);
@@ -29,9 +29,13 @@ function MyCollapse({ datasubject, otherTables, edges }) {
           {openDS && (
             <div className="collapse">
               {datasubject.map((element, index) => (
-                <Card key={index} body style={{ width: "200px" }}>
+                <Button
+                  className="button"
+                  onClick={() => handleSelectedItem(element)}
+                  key={index}
+                >
                   {element}
-                </Card>
+                </Button>
               ))}
             </div>
           )}
@@ -39,9 +43,13 @@ function MyCollapse({ datasubject, otherTables, edges }) {
           {openT && (
             <div className="collapse">
               {otherTables.map((element, index) => (
-                <Card key={index} body style={{ width: "200px" }}>
+                <Button
+                  className="button"
+                  onClick={() => handleSelectedItem(element)}
+                  key={index}
+                >
                   {element}
-                </Card>
+                </Button>
               ))}
             </div>
           )}
@@ -49,9 +57,21 @@ function MyCollapse({ datasubject, otherTables, edges }) {
           {openE && (
             <div className="collapse">
               {edges.map((element, index) => (
-                <Card body style={{ width: "200px" }}>
+                <Button
+                  className="button"
+                  onClick={() =>
+                    handleSelectedItem(
+                      element.from +
+                        "_" +
+                        element.annotation +
+                        "_" +
+                        element.edgeName
+                    )
+                  }
+                  key={index}
+                >
                   {element.from} {element.annotation} {element.to}
-                </Card>
+                </Button>
               ))}
             </div>
           )}

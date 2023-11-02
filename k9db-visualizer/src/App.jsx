@@ -22,6 +22,11 @@ export default function App() {
     console.log(edges);
   };
 
+  const handleSelectedItem = (selectedItem) => {
+    setSelectedItem(selectedItem);
+    console.log(selectedItem);
+  };
+
   return (
     <div>
       <div className="split left">
@@ -29,6 +34,7 @@ export default function App() {
           datasubject={datasubject}
           otherTables={otherTables}
           edges={edges}
+          handleSelectedItem={handleSelectedItem}
         />
       </div>
 
