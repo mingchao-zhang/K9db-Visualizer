@@ -7,20 +7,7 @@ export enum EdgeType {
   AccessedBy = "accessed_by",
 }
 
-export function getMarkerEnd(e: EdgeType) {
-  switch (e) {
-    case EdgeType.Owns:
-      return ownsMarkerEnd;
-    case EdgeType.OwnedBy:
-      return ownedbyMarkerEnd;
-    case EdgeType.Accesses:
-      return accessesMarkerEnd;
-    case EdgeType.AccessedBy:
-      return accessedbyMarkerEnd;
-  }
-}
-
-export function getFlowEdgeType(e: EdgeType) {
+function getFlowEdgeType(e: EdgeType) {
   switch (e) {
     case EdgeType.Owns:
       return "ownsedge";
@@ -33,29 +20,22 @@ export function getFlowEdgeType(e: EdgeType) {
   }
 }
 
+function getHandleType(e: EdgeType) {
+  switch (e) {
+    case EdgeType.Owns:
+    case EdgeType.OwnedBy:
+      return "own";
+    case EdgeType.Accesses:
+    case EdgeType.AccessedBy:
+      return "access";
+  }
+}
+
 export const edgeStyle = {
   strokeWidth: 1.2,
 };
 
-const ownsMarkerEnd = {
-  type: MarkerType.ArrowClosed,
-  width: 18,
-  height: 20,
-};
-
-const ownedbyMarkerEnd = {
-  type: MarkerType.ArrowClosed,
-  width: 18,
-  height: 20,
-};
-
-const accessesMarkerEnd = {
-  type: MarkerType.ArrowClosed,
-  width: 18,
-  height: 20,
-};
-
-const accessedbyMarkerEnd = {
+const markerEnd = {
   type: MarkerType.ArrowClosed,
   width: 18,
   height: 20,
@@ -67,31 +47,39 @@ export const initEdges = [
     source: "2",
     target: "1",
     type: "ownsedge",
-    markerEnd: ownsMarkerEnd,
+    sourceHandle: "own",
+    targetHandle: "own",
+    markerEnd: markerEnd,
     style: edgeStyle,
   },
   {
     id: "edges-e2-2a",
     source: "3",
     target: "2",
+    sourceHandle: "own",
+    targetHandle: "own",
     type: "ownedbyedge",
-    markerEnd: ownedbyMarkerEnd,
+    markerEnd: markerEnd,
     style: edgeStyle,
   },
   {
     id: "edges-e2-3",
     source: "4",
     target: "2",
+    sourceHandle: "access",
+    targetHandle: "access",
     type: "accessesedge",
-    markerEnd: accessesMarkerEnd,
+    markerEnd: markerEnd,
     style: edgeStyle,
   },
   {
     id: "edges-e3-4",
     source: "5",
     target: "4",
+    sourceHandle: "access",
+    targetHandle: "access",
     type: "accessedbyedge",
-    markerEnd: accessedbyMarkerEnd,
+    markerEnd: markerEnd,
     style: edgeStyle,
   },
 ];
@@ -105,15 +93,16 @@ const Edges = function (edges: any[]) {
   for (const e of edges) {
     ret.push({
       id: e.from + "_" + e.annotation + "_" + e.edgeName,
-      sourceHandle: "s1",
       source: e.from,
       target: e.to,
+      sourceHandle: getHandleType(e.annotation),
+      targetHandle: getHandleType(e.annotation),
       type: getFlowEdgeType(e.annotation),
-      markerEnd: getMarkerEnd(e.annotation),
+      markerEnd: markerEnd,
       style: edgeStyle,
+      label: "hahah",
     });
   }
-
   return ret;
 };
 

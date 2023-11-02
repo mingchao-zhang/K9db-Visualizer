@@ -39,10 +39,7 @@ const splitTablesEdges = function (parsedSchema) {
 
   let dsRes: any[] = [];
   let otRes: any[] = [];
-  console.log(coordsMap);
   for (const [key, value] of Object.entries(coordsMap)) {
-    console.log(key);
-    console.log(value);
     if (dataSubjects.includes(key)) {
       dsRes.push(value);
     } else {

@@ -3,9 +3,7 @@ import {
   BaseEdge,
   EdgeLabelRenderer,
   EdgeProps,
-  ReactFlowState,
   getBezierPath,
-  useStore,
 } from "reactflow";
 
 import "./edge.css";

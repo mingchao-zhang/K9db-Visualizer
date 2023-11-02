@@ -1,12 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import "reactflow/dist/style.css";
 import ReactFlow, {
   MiniMap,
   Background,
   useNodesState,
   useEdgesState,
-  addEdge,
-  MarkerType,
 } from "reactflow";
 import ControlPanel from "./ControlPanelComponent/ControlPanel";
 
@@ -42,11 +40,6 @@ const Flow = ({
   );
   const [edges, setEdges, onEdgesChange] = useEdgesState(Edges(parsedEdges));
 
-  const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
-    []
-  );
-
   const handleStateChange = (dataSubject, otherTables, edges) => {
     console.log("state changed...");
     setNodes(Nodes(dataSubject, otherTables));
@@ -62,7 +55,6 @@ const Flow = ({
         nodeTypes={nodeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
         snapToGrid={true}
         fitView
         attributionPosition="top-right"
