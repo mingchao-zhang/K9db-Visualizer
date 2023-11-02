@@ -1,4 +1,4 @@
-import { parse } from './parse.js';
+import { parser } from './parse.js';
 import { getGraph, topoSort } from './graph.js';
 import { calculateCoordinates } from './coordinate.js'
 
@@ -31,7 +31,7 @@ const createStatements = [
 ]
 
 // get graph and topologically-sorted nodes
-var parsedObjects = parse(createStatements)
+var parsedObjects = parser(createStatements)
 var graph = getGraph(parsedObjects)
 var sortedNodes = topoSort(graph)
 console.log(graph)

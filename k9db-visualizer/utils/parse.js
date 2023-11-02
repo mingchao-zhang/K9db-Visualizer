@@ -120,7 +120,7 @@ export default parse;
 Given an array of SQL create statements with K9db annotations, 
 returns a list of Node and Edge objects. If any statement is invalid, 
 empty array will be returned. */
-export function parse(statements) {
+export function parser(statements) {
     var res = []
     for (const statement of statements) {
         if (statement.toLowerCase().indexOf("create") !== -1) {
