@@ -31,10 +31,10 @@ function MyCollapse({ datasubject, otherTables, edges, handleSelectedItem }) {
               {datasubject.map((element, index) => (
                 <Button
                   className="button"
-                  onClick={() => handleSelectedItem(element)}
+                  onClick={() => handleSelectedItem(element.tableName)}
                   key={index}
                 >
-                  {element}
+                  {element.tableName}
                 </Button>
               ))}
             </div>
@@ -45,10 +45,10 @@ function MyCollapse({ datasubject, otherTables, edges, handleSelectedItem }) {
               {otherTables.map((element, index) => (
                 <Button
                   className="button"
-                  onClick={() => handleSelectedItem(element)}
+                  onClick={() => handleSelectedItem(element.tableName)}
                   key={index}
                 >
-                  {element}
+                  {element.tableName}
                 </Button>
               ))}
             </div>
