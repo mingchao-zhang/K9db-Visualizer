@@ -43,7 +43,7 @@ const markerEnd = {
 
 export const initEdges = [
   {
-    id: "edges-e1-2",
+    id: "edges-e1-2-1",
     source: "2",
     target: "1",
     type: "ownsedge",
@@ -51,6 +51,18 @@ export const initEdges = [
     targetHandle: "own",
     markerEnd: markerEnd,
     style: edgeStyle,
+    data: -60,
+  },
+  {
+    id: "edges-e1-2-2",
+    source: "2",
+    target: "1",
+    type: "ownsedge",
+    sourceHandle: "own",
+    targetHandle: "own",
+    markerEnd: markerEnd,
+    style: edgeStyle,
+    data: 60,
   },
   {
     id: "edges-e2-2a",
@@ -61,6 +73,7 @@ export const initEdges = [
     type: "ownedbyedge",
     markerEnd: markerEnd,
     style: edgeStyle,
+    data: -60,
   },
   {
     id: "edges-e2-3",
@@ -71,6 +84,7 @@ export const initEdges = [
     type: "accessesedge",
     markerEnd: markerEnd,
     style: edgeStyle,
+    data: -60,
   },
   {
     id: "edges-e3-4",
@@ -81,6 +95,7 @@ export const initEdges = [
     type: "accessedbyedge",
     markerEnd: markerEnd,
     style: edgeStyle,
+    data: 30,
   },
 ];
 
@@ -100,7 +115,6 @@ const Edges = function (edges: any[]) {
       type: getFlowEdgeType(e.annotation),
       markerEnd: markerEnd,
       style: edgeStyle,
-      label: "hahah",
     });
   }
   return ret;

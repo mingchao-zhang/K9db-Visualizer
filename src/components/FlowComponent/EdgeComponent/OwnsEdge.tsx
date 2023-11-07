@@ -3,10 +3,13 @@ import {
   BaseEdge,
   EdgeLabelRenderer,
   EdgeProps,
+  ReactFlowState,
   getBezierPath,
+  useStore,
 } from "reactflow";
 
 import "./edge.css";
+import { getSpecialPath } from "./util/getSpecialPath";
 
 const onEdgeClick = (id) => {
   console.log("clicked owns edge: " + id);
@@ -21,31 +24,30 @@ export default function OwnsEdge({
   sourcePosition,
   targetPosition,
   style = {},
-  markerEnd
+  markerEnd,
+  data, //offset?
 }: EdgeProps) {
-  const [edgePath, labelX, labelY] = getBezierPath({
+  const edgePathParams = {
     sourceX,
     sourceY,
     sourcePosition,
     targetX,
     targetY,
     targetPosition,
-  });
+  };
 
- 
+  const [path, labelX, labelY] = getSpecialPath(edgePathParams, data);
 
   return (
     <>
-      <BaseEdge
-        path={edgePath}
-        markerEnd={markerEnd}
-        style={style}
-      />
+      <BaseEdge path={path} markerEnd={markerEnd} style={style} />
       <EdgeLabelRenderer>
         <div
           style={{
             position: "absolute",
-            transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
+            transform: `translate(-50%, -50%) translate(${
+              labelX + data / 2
+            }px,${labelY}px)`,
             fontSize: 12,
             // everything inside EdgeLabelRenderer has no pointer events by default
             // if you have an interactive element, set pointer-events: all
