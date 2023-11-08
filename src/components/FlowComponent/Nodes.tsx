@@ -15,19 +15,19 @@ const initNodes = [
     id: "3",
     type: "nondatasubjectnode",
     data: { label: "example_table2", handleCount: 2 },
-    position: { x: 0, y: 350 },
+    position: { x: 0, y: 400 },
   },
   {
     id: "4",
     type: "nondatasubjectnode",
     data: { label: "example_table3", handleCount: 2 },
-    position: { x: 250, y: 450 },
+    position: { x: 250, y: 400 },
   },
   {
     id: "5",
     type: "nondatasubjectnode",
     data: { label: "example_table4", handleCount: 2 },
-    position: { x: 400, y: 550 },
+    position: { x: 150, y: 600 },
   },
 ];
 

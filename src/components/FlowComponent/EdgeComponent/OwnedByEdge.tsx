@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  BaseEdge,
-  EdgeLabelRenderer,
-  EdgeProps,
-  ReactFlowState,
-  getBezierPath,
-  useStore,
-} from "reactflow";
+import { BaseEdge, EdgeLabelRenderer, EdgeProps } from "reactflow";
 import "./edge.css";
-import { getSpecialPath } from "./util/getSpecialPath";
+import { getSpecialPath } from "./getSpecialPath";
 
 const onEdgeClick = (id) => {
   console.log("clicked owns edge: " + id);
@@ -16,8 +9,6 @@ const onEdgeClick = (id) => {
 
 export default function OwnedByEdge({
   id,
-  source,
-  target,
   sourceX,
   sourceY,
   targetX,

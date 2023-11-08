@@ -41,6 +41,25 @@ const markerEnd = {
   height: 20,
 };
 
+export function calculateOffset(numEdges: number): number[] {
+  const offset = 60;
+  const offsets = new Array<number>(numEdges);
+  var low: number = 0;
+  var high: number = numEdges - 1;
+  var mid: number;
+  if (numEdges % 2) {
+    mid = (numEdges - 1) / 2;
+    offsets[mid] = 0;
+  } else {
+    mid = numEdges / 2;
+  }
+  for (var i = 0; i < mid; i++) {
+    offsets[low + i] = offset * (i + 1);
+    offsets[high - i] = offset * -(i + 1);
+  }
+  return offsets;
+}
+
 export const initEdges = [
   {
     id: "edges-e1-2-1",
@@ -104,19 +123,35 @@ const Edges = function (edges: any[]) {
     return initEdges;
   }
 
+  const edgeMap = new Map();
+
   let ret: any[] = [];
   for (const e of edges) {
-    ret.push({
-      id: e.from + "_" + e.annotation + "_" + e.edgeName,
-      source: e.from,
-      target: e.to,
-      sourceHandle: getHandleType(e.annotation),
-      targetHandle: getHandleType(e.annotation),
-      type: getFlowEdgeType(e.annotation),
-      markerEnd: markerEnd,
-      style: edgeStyle,
-    });
+    var fromTo = e.from + "_" + e.to;
+    if (!edgeMap.has(fromTo)) {
+      edgeMap.set(fromTo, []);
+    }
+    edgeMap.get(fromTo).push(e);
   }
+
+  edgeMap.forEach((value: any[], _: string) => {
+    var numEdges = value.length;
+    const posOffsets = calculateOffset(numEdges);
+    for (var i = 0; i < value.length; i++) {
+      var e = value[i];
+      ret.push({
+        id: e.from + "_" + e.annotation + "_" + e.edgeName,
+        source: e.from,
+        target: e.to,
+        sourceHandle: getHandleType(e.annotation),
+        targetHandle: getHandleType(e.annotation),
+        type: getFlowEdgeType(e.annotation),
+        markerEnd: markerEnd,
+        style: edgeStyle,
+        data: posOffsets[i],
+      });
+    }
+  });
   return ret;
 };
 
