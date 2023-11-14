@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BaseEdge, EdgeLabelRenderer, EdgeProps } from "reactflow";
 
 import "./edge.css";
@@ -30,7 +30,7 @@ export default function AccessedByEdge({
   };
 
   const [path, labelX, labelY] = getSpecialPath(edgePathParams, data);
-
+  const [isShown, setIsShown] = useState(false);
   return (
     <>
       <BaseEdge path={path} markerEnd={markerEnd} style={style} />
@@ -48,7 +48,13 @@ export default function AccessedByEdge({
           }}
           className="nodrag nopan"
         >
-          <button className="edgeaccessedby" onClick={() => onEdgeClick(id)}>
+          {isShown && <div>AccessedBy Placeholder</div>}
+          <button
+            className="edgeaccessedby"
+            onClick={() => onEdgeClick(id)}
+            onMouseEnter={() => setIsShown(true)}
+            onMouseLeave={() => setIsShown(false)}
+          >
             ACCESSED_BY
           </button>
         </div>

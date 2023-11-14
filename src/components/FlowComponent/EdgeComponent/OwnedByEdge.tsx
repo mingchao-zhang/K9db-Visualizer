@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BaseEdge, EdgeLabelRenderer, EdgeProps } from "reactflow";
 import "./edge.css";
 import { getSpecialPath } from "./getSpecialPath";
@@ -29,6 +29,7 @@ export default function OwnedByEdge({
   };
 
   const [path, labelX, labelY] = getSpecialPath(edgePathParams, data);
+  const [isShown, setIsShown] = useState(false);
 
   return (
     <>
@@ -47,7 +48,13 @@ export default function OwnedByEdge({
           }}
           className="nodrag nopan"
         >
-          <button className="edgeownedby" onClick={() => onEdgeClick(id)}>
+          {isShown && <div>OwnedBy Placeholder</div>}
+          <button
+            className="edgeownedby"
+            onClick={() => onEdgeClick(id)}
+            onMouseEnter={() => setIsShown(true)}
+            onMouseLeave={() => setIsShown(false)}
+          >
             OWNED_BY
           </button>
         </div>
