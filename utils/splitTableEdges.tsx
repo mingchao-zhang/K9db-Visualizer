@@ -25,10 +25,10 @@ const splitTablesEdges = function (parsedObjects) {
   for (const row of modifiedObjects) {
     if (row.annotation !== "data_subject") {
       if (!dataSubjects.has(row.from) && !otherTables.has(row.from)) {
-        dataSubjects.set(row.from, row.hasOwnProperty("errorMsg"))
+        otherTables.set(row.from, row.hasOwnProperty("errorMsg"))
       }
       if (!dataSubjects.has(row.to) && !otherTables.has(row.to)) {
-        dataSubjects.set(row.to, row.hasOwnProperty("errorMsg"))
+        otherTables.set(row.to, row.hasOwnProperty("errorMsg"))
       }
     }
   }
