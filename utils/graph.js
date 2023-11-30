@@ -1,3 +1,5 @@
+import { isNodeObject } from "./types.js"
+
 // dependencyGraphGraph; for a node, store what other nodes the current one depends on
 function getDependencyGraph(parsedObjects) {
     const nodeSet = new Set()
@@ -83,14 +85,12 @@ export function topoSort(parsedObjects) {
 // Given a list of edge/node objects, return a list of all unique nodes
 export function getAllNodes(parsedObjects) {
     const nodeSet = new Set()
-    var edges = []
     for (const obj of parsedObjects) {
-        if (obj.annotation === "data_subject") {
+        if (isNodeObject(obj)) {
             nodeSet.add(obj.tableName)
         } else {
             nodeSet.add(obj.from)
             nodeSet.add(obj.to)
-            edges.push(obj)
         }
     }
     return [...nodeSet]
