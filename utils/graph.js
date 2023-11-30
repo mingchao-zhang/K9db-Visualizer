@@ -5,7 +5,7 @@ function getDependencyGraph(parsedObjects) {
     const nodeSet = new Set()
     var edges = []
     for (const obj of parsedObjects) {
-        if (obj.annotation === "data_subject") {
+        if (isNodeObject(obj)) {
             nodeSet.add(obj.tableName)
         } else {
             nodeSet.add(obj.from)
