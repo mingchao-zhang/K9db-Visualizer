@@ -13,12 +13,6 @@ export default function App() {
 
   const handleParsedSchema = (parsedSchema) => {
     setParsedSchema(parsedSchema);
-    console.log(parsedSchema);
-
-    let res = splitTablesEdges(parsedSchema);
-    setDatasubject(res[0]);
-    setOtherTables(res[1]);
-    setEdges(res[2]);
   };
 
   const handleSelectedItem = (selectedItem) => {
