@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Flow from "./components/FlowComponent/Flow";
 import MyCollapse from "./components/MenuComponent/Collapse";
-import splitTablesEdges from "../utils/splitTableEdges"
+import splitTablesEdges from "../utils/splitTableEdges";
 
 export default function App() {
   const [selectedItem, setSelectedItem] = useState("");
@@ -34,6 +34,9 @@ export default function App() {
       <div className="split right">
         <Flow
           handleParsedSchema={handleParsedSchema}
+          setDatasubject={setDatasubject}
+          setOtherTables={setOtherTables}
+          setEEdges={setEdges}
           parsedDataSubject={datasubject}
           parsedEdges={edges}
           parsedOtherTables={otherTables}

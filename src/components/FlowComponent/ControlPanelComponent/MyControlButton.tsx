@@ -16,7 +16,7 @@ const MyControlButton = ({ name, handleParsedSchema, handleStateChange }) => {
   const handleSubmit = () => {
     setShow(false);
     let splitRes = splitTablesEdges(schema.content);
-    handleParsedSchema(splitRes[0])
+    handleParsedSchema(splitRes[0]);
     handleStateChange(splitRes[0], splitRes[1], splitRes[2]);
   };
 
