@@ -4,7 +4,7 @@ import { topoSort, getGraphFromObjects } from './graph.js';
 
 // when the graph is valid, arrange nodes level by level
 function getValidGraphCoords(objects, canvasW, canvasH) {
-    let sortedNodes = topoSort(objects).reverse()
+    let sortedNodes = topoSort(objects)
     // calculate the height assigned to each level
     var heightPerLevel = canvasH / sortedNodes.length
 

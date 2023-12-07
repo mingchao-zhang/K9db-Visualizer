@@ -1,8 +1,8 @@
 import { getCoords } from "./interface.js";
 
 const splitTablesEdges = function (parsedObjects) {
-  var canvasWidth = 1000;
-  var canvasHeight = 500;
+  var canvasWidth = 2000;
+  var canvasHeight = 1000;
   let [modifiedObjects, coordsMap] = getCoords(
     parsedObjects,
     canvasWidth,

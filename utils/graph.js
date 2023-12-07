@@ -19,7 +19,7 @@ function getDependencyGraph(parsedObjects) {
         G[node] = new Set()
     }
     for (const edge of edges) {
-        G[edge.to].add(edge.from)
+        G[edge.from].add(edge.to)
     }
     return G
 }
@@ -30,9 +30,9 @@ function getGraph(dependencyGraph) {
     for (const node in dependencyGraph) {
         G[node] = new Set()
     }
-    for (const fromNode in G) {
-        for (const toNode of dependencyGraph[fromNode]) {
-            G[toNode].add(fromNode)
+    for (const toNode in G) {
+        for (const fromNode of dependencyGraph[toNode]) {
+            G[fromNode].add(toNode)
         }
     }
     return G

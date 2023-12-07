@@ -7,12 +7,12 @@ export function getCoords(parsedObjects, canvasW, canvasH) {
     // 1. Build a graph and validate if the graph is valid.
     // If not, the `errMsg` will be added to problem edges
     let [invalidType, modifiedObjects] = validate(parsedObjects)
-    console.log("Interface 10: ", invalidType, modifiedObjects)
+    // console.log("Interface 10: ", invalidType, modifiedObjects)
 
     // 2. Pass objects with potentially error messages to the coordinate calculation function
     let coordsMap = calculateCoordinates(invalidType, modifiedObjects, canvasW, canvasH)
 
-    console.log("Interface 15: ", coordsMap)
+    // console.log("Interface 15: ", coordsMap)
     return [modifiedObjects, coordsMap]
 }
 
