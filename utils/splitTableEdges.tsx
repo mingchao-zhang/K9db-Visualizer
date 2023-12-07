@@ -1,7 +1,7 @@
 import { getObjectsAndCoords } from "./interface.js";
 
 const splitTablesEdges = function (schema) {
-  var canvasWidth = 2000;
+  var canvasWidth = 1500;
   var canvasHeight = 1000;
   let [modifiedObjects, coordsMap] = getObjectsAndCoords(
     schema,

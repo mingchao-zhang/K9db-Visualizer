@@ -1,7 +1,7 @@
 import { isNodeObject } from "./types.js"
 
 // dependencyGraphGraph; for a node, store what other nodes the current one depends on
-function getDependencyGraph(parsedObjects) {
+export function getDependencyGraph(parsedObjects) {
     const nodeSet = new Set()
     var edges = []
     for (const obj of parsedObjects) {
@@ -21,20 +21,20 @@ function getDependencyGraph(parsedObjects) {
         G[node] = new Set()
     }
     for (const edge of edges) {
-        G[edge.from].add(edge.to)
+        G[edge.to].add(edge.from)
     }
     return G
 }
 
 // what neighbors can the current node travel to
-function getGraph(dependencyGraph) {
+export function getGraph(dependencyGraph) {
     const G = {};
     for (const node in dependencyGraph) {
         G[node] = new Set()
     }
-    for (const toNode in G) {
-        for (const fromNode of dependencyGraph[toNode]) {
-            G[fromNode].add(toNode)
+    for (const fromNode in G) {
+        for (const toNode of dependencyGraph[fromNode]) {
+            G[toNode].add(fromNode)
         }
     }
     return G
@@ -94,4 +94,29 @@ export function getAllNodes(parsedObjects) {
         }
     }
     return [...nodeSet]
+}
+
+export function getReverseDependencyGraph(parsedObjects) {
+    const nodeSet = new Set()
+    var edges = []
+    for (const obj of parsedObjects) {
+        if (isNodeObject(obj)) {
+            nodeSet.add(obj.tableName)
+        } else {
+            nodeSet.add(obj.from)
+            nodeSet.add(obj.to)
+            edges.push(obj)
+        }
+    }
+
+    // create an adjacency list
+    const G = {};
+    for (const node of nodeSet) {
+        // G.set(node, new Set())
+        G[node] = new Set()
+    }
+    for (const edge of edges) {
+        G[edge.from].add(edge.to)
+    }
+    return G
 }

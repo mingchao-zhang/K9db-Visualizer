@@ -17,7 +17,7 @@ function detectCycle(parsedObjects) {
         if (isEdgeObject(obj)) {
             fromNodeMap[obj.from] = obj
         } else {
-            // non edge objects will be added to the result 
+            // non-edge objects will be added to the result 
             resObjects.push(obj)
         }
     }

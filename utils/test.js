@@ -9,9 +9,9 @@ let canvasHeight = 1000
 
 // test cycles of two nodes
 // let [objects, coordsMap] = getObjectsAndCoords(statements.twoNodesCycle1, canvasWidth, canvasHeight)
-// let [objects, coordsMap] = getObjectsAndCoords(statements.twoNodesCycle2, canvasWidth, canvasHeight)
+let [objects, coordsMap] = getObjectsAndCoords(statements.twoNodesCycle2, canvasWidth, canvasHeight)
 
 // test cycles of three nodes
-let [objects, coordsMap] = getObjectsAndCoords(statements.lobsterCompleteSchema, canvasWidth, canvasHeight)
+// let [objects, coordsMap] = getObjectsAndCoords(statements.lobsterCompleteSchema, canvasWidth, canvasHeight)
 // console.log(objects)
 // console.log(coordsMap)
